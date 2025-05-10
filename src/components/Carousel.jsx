@@ -26,7 +26,7 @@ const Carousel = () => {
   };
 
   return (
-    <div className="w-full  mx-auto p-4">
+    <div className="w-full object-fit mx-auto p-4">
       <Slider {...settings}>
       {images.map((src, index) => (
   <div key={index}>
