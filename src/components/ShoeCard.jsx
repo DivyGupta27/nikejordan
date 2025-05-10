@@ -16,7 +16,7 @@ const ShoeCard = ({ name, category, price, color, gender, image, inStock}) => {
     
 
     try {
-      const response = await fetch('http://localhost:8000/user/cart/items', {
+      const response = await fetch('https://nikejordan.onrender.com/user/cart/items', {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

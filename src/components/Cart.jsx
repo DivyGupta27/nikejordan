@@ -10,7 +10,7 @@ const Cart = () => {
   useEffect(() => {
     const fetchCart = async () => {
       try {
-        const response = await fetch('http://localhost:8000/user/cart/getcart', {
+        const response = await fetch('https://nikejordan.onrender.com/user/cart/getcart', {
           method: "GET",
           headers: {
             'auth-token': localStorage.getItem('token'),
@@ -47,7 +47,7 @@ const Cart = () => {
 
   const removeFromCart = async (id) => {
     try {
-      const response = await fetch(`http://localhost:8000/user/cart/remove${id}`, {
+      const response = await fetch(`https://nikejordan.onrender.com/user/cart/remove${id}`, {
         method: 'DELETE',
         headers: {
           'auth-token': localStorage.getItem('token'),

@@ -10,7 +10,7 @@ const Providershoe = ({ children }) => {
 
   const fetchshoedata = async () => {
     try {
-      const response = await fetch('http://localhost:8000/add/shoes/getshoes', {
+      const response = await fetch('https://nikejordan.onrender.com/add/shoes/getshoes', {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
