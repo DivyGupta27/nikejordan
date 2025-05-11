@@ -26,7 +26,9 @@ const Cart = () => {
         }
       } catch (err) {
         console.error(err)
-        toast.error('Error fetching cart')
+        toast.error('Error fetching cart',{
+          position:'top-center'
+        })
       }
     }
 
