@@ -7,7 +7,7 @@ import 'react-loading-skeleton/dist/skeleton.css';
 const Kids = () => {
   const { fetchdata } = useContext(ShoeData);
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 8;
+  const itemsPerPage = 9;
 
   const kidsShoes = fetchdata?.shoes?.filter((shoe) => shoe.gender === 'Kids') || [];
 
