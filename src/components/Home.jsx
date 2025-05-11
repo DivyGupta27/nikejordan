@@ -8,11 +8,11 @@ import 'react-loading-skeleton/dist/skeleton.css';
 import { ToastContainer } from 'react-toastify';
 
 const Home = () => {
-  const { fetchdata, isLoading } = useContext(shoedata); // Add isLoading from context
+  const { fetchdata, isLoading } = useContext(shoedata);
   const [page, setPage] = useState(1);
   const pageitems = 9;
 
-  // Safe pagination calculation with optional chaining
+  // Safe pagination calculation
   const totalItems = fetchdata?.shoes?.length || 0;
   const totalPages = Math.ceil(totalItems / pageitems);
   const startIndex = (page - 1) * pageitems;
@@ -39,65 +39,62 @@ const Home = () => {
       <div className="text-4xl font-medium m-5">Latest collection</div>
       
       {/* Loading State */}
-      {isLoading && (
-        <div className="flex justify-center w-full gap-9 mt-6 flex-wrap">
-          {Array(8)
-            .fill()
-            .map((_, index) => (
-              <div key={index} className="w-64">
-                <Skeleton height={200} />
-                <Skeleton count={3} />
-              </div>
-            ))}
+      {isLoading ? (
+        <div className="flex justify-center w-full gap-7 mt-6 flex-wrap">
+          {Array(8).fill().map((_, index) => (
+            <div key={index} className="w-64">
+              <Skeleton height={200} />
+              <Skeleton count={3} />
+            </div>
+          ))}
         </div>
-      )}
-
-      {/* Loaded State */}
-      {!isLoading && (
+      ) : (
         <>
-          <div className="flex justify-center w-full gap-9 mt-6 flex-wrap">
-            {pagination.map((shoe,i) => (
-              <ShoeCard
-                key={shoe._id || i}
-                name={shoe.name}
-                category={shoe.category}
-                price={shoe.price}
-                color={shoe.color}
-                gender={shoe.gender}
-                image={shoe.image}
-                inStock={shoe.inStock}
-              />
-            ))}
+
+          <div className="flex justify-center w-full gap-7 mt-6 flex-wrap">
+            {pagination.length > 0 ? (
+              pagination.map((shoe) => (
+                <ShoeCard
+                  key={shoe._id}
+                  name={shoe.name}
+                  category={shoe.category}
+                  price={shoe.price}
+                  color={shoe.color}
+                  gender={shoe.gender}
+                  image={shoe.image}
+                  inStock={shoe.inStock}
+                />
+              ))
+            ) : (
+              <div className="text-center py-12 text-xl w-full">
+                No shoes found in the collection
+              </div>
+            )}
           </div>
 
           {/* Pagination Controls */}
-          <div className="flex justify-center gap-4 mt-8">
-            <button
-              onClick={handlePrevious}
-              disabled={page === 1}
-              className="px-4 py-2 bg-gray-200 rounded disabled:opacity-50"
-            >
-              Previous
-            </button>
-            <span className="px-4 py-2">
-              Page {page} of {totalPages}
-            </span>
-            <button
-              onClick={handleNext}
-              disabled={page === totalPages}
-              className="px-4 py-2 bg-gray-200 rounded disabled:opacity-50"
-            >
-              Next
-            </button>
-          </div>
+          {totalPages > 1 && (
+            <div className="flex justify-center gap-4 mt-8">
+              <button
+                onClick={handlePrevious}
+                disabled={page === 1}
+                className="px-4 py-2 bg-gray-200 rounded disabled:opacity-50"
+              >
+                Previous
+              </button>
+              <span className="px-4 py-2">
+                Page {page} of {totalPages}
+              </span>
+              <button
+                onClick={handleNext}
+                disabled={page === totalPages}
+                className="px-4 py-2 bg-gray-200 rounded disabled:opacity-50"
+              >
+                Next
+              </button>
+            </div>
+          )}
         </>
-      )}
-
-      {/* Empty State */}
-      {!isLoading && pagination.length === 0 && (
-        <div className="text-center py-12 text-xl">
-          No shoes found in the collection
-        </div>
       )}
 
       <ToastContainer />
