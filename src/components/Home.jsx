@@ -67,7 +67,8 @@ const Home = () => {
               ))
             ) : (
               <div className="text-center py-12 text-xl w-full">
-                No shoes found in the collection
+                <Skeleton height={200} />
+              <Skeleton count={3} />
               </div>
             )}
           </div>
